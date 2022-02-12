@@ -8,6 +8,8 @@ public class Ticket {
     private TicketType ticketType;
     private Integer capacity;
     private AirplaneClass airplaneClass;
+    private String destCityName;
+    private String srcCityName;
 
     public Ticket(Airplane airplane,
                   Long cost,
@@ -23,7 +25,27 @@ public class Ticket {
         this.airplaneClass = airplaneClass;
     }
 
+    public Ticket(Airplane airplane,
+                  Long cost,
+                  LocalDate dateOfFlight,
+                  TicketType ticketType,
+                  Integer capacity,
+                  AirplaneClass airplaneClass,
+                  String destCityName,
+                  String srcCityName) {
+        this.airplane = airplane;
+        this.cost = cost;
+        this.dateOfFlight = dateOfFlight;
+        this.ticketType = ticketType;
+        this.capacity = capacity;
+        this.airplaneClass = airplaneClass;
+        this.destCityName = destCityName;
+        this.srcCityName = srcCityName;
+    }
+
     public Ticket() {
+        this.cost = Long.valueOf(40);
+        this.capacity = Integer.valueOf(850);
     }
 
     public Airplane getAirplane() {
@@ -74,6 +96,22 @@ public class Ticket {
         this.capacity = capacity;
     }
 
+    public String getDestCityName() {
+        return destCityName;
+    }
+
+    public void setDestCityName(String destCityName) {
+        this.destCityName = destCityName;
+    }
+
+    public String getSrcCityName() {
+        return srcCityName;
+    }
+
+    public void setSrcCityName(String srcCityName) {
+        this.srcCityName = srcCityName;
+    }
+
     public Long getFinalCost(AirplaneClass airplaneClass) {
         long finalCost = 0;
 
@@ -94,6 +132,10 @@ public class Ticket {
         return finalCost;
     }
 
+    public void addTicketToTheAirplane(Ticket ticket) {
+        airplane.setTicket(ticket);
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -103,6 +145,8 @@ public class Ticket {
                 ", ticketType=" + ticketType +
                 ", capacity=" + capacity +
                 ", airplaneClass=" + airplaneClass +
+                ", destCityName='" + destCityName + '\'' +
+                ", srcCityName='" + srcCityName + '\'' +
                 '}';
     }
 }

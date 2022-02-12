@@ -3,6 +3,12 @@ import java.util.regex.Pattern;
 
 public class SystemChecks {
 
+    private static SystemChecks instance = new SystemChecks();
+
+    public static SystemChecks getInstance() {
+        return instance;
+    }
+
     public boolean isUserNameValid(String username) {
 
         String regex = "^[A-Za-z]\\w{5,29}$";
@@ -52,5 +58,35 @@ public class SystemChecks {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.matches();
+    }
+
+    public boolean isAirplaneIDValid(DataBase dataBase, String airplaneID) {
+        for (int i = 0; i < dataBase.getAirplanes().size(); i++) {
+            if (dataBase.getAirplanes().get(i).getID().equals(airplaneID)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isSrcCityNameValid(DataBase dataBase, String srcCityName) {
+        for (int i = 0; i < dataBase.getTickets().size(); i++) {
+            if (dataBase.getTickets().get(i).getSrcCityName().equals(srcCityName)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isDestCityNameValid(DataBase dataBase, String destCityName) {
+        for (int i = 0; i < dataBase.getTickets().size(); i++) {
+            if (dataBase.getTickets().get(i).getDestCityName().equals(destCityName)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
